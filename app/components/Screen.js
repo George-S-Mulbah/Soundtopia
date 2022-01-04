@@ -5,7 +5,7 @@ import colors from '../config/colors';
 
 function Screen({ children, style }) {
   return (
-      <SafeAreaView style={[styles.screen, style]}>
+    <SafeAreaView style={[styles.screen, style]}>
              <View style={[styles.view, style]}>{children}</View>
       </SafeAreaView>
   );
