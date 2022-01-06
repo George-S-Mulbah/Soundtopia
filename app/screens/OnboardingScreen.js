@@ -15,6 +15,7 @@ import {
 import { useFonts } from 'expo-font';
 import {Chewy_400Regular} from '@expo-google-fonts/chewy'
 import colors from '../config/colors';
+import AppText from '../components/AppText';
 
 const { width, height } = Dimensions.get('window');
 
@@ -39,7 +40,7 @@ const slides = [
   {
     id: '3',
     image: require('../assets/c.png'),
-    title: 'Music is life',
+    title: "Music is what feelings sounds like",
     subtitle:'Music is what keep you moving',
 
   }
@@ -49,7 +50,7 @@ const Slide = ({ item }) => {
   return (
     <View style={styles.slide}>
       <Image source={item.image} style={{ height: '75%', width, resizeMode: 'contain' }} />
-      <Text style={styles.title}>{item.title}</Text>
+      <AppText style={{color:colors.black}}>{item.title}</AppText>
     </View>
   )
 } 
@@ -91,15 +92,16 @@ function OnboardingScreen({navigation}) {
           <View style={{height:50}}>
                 <TouchableOpacity style={[styles.btn_2]}
                   onPress={() => navigation.replace("WelcomeScreen")}>
-              <Text style={{ color: COLORS.primary, fontSize: 15, fontWeight: 'bold' }}>Get Started</Text>    
+                  {/* <Text style={{ color: COLORS.primary, fontSize: 15, fontWeight: 'bold', }}>Get Started</Text>     */}
+                  <AppText style={{color:colors.primary}}>Get Started</AppText>
             </TouchableOpacity>
               </View> :    
           <View style={{ flexDirection: 'row' }}>
             <TouchableOpacity style={[styles.btn]} onPress={skip}>
-              <Text style={{color:COLORS.black,fontSize:15,fontWeight:'bold'}}>SKIP</Text>
+                  <AppText style={{color:colors.black,fontSize:18}}>SKIP</AppText>
             </TouchableOpacity>
             <TouchableOpacity style={[styles.btn_2]} onPress={goNextSlide}>
-              <Text style={{color:COLORS.primary,fontSize:15,fontWeight:'bold'}}>Next</Text>
+            <AppText style={{color:colors.primary,fontSize:18}}>Next</AppText>
             </TouchableOpacity>
           </View>
           }
@@ -156,12 +158,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   title: {
-    color: COLORS.blue,
-    fontSize: 28,
-    fontWeight: 'bold',
-    fontFamily: 'Roboto',
-    marginTop: 20,
-    textAlign:'center'
+   
     
   },
   indicator: {

@@ -8,6 +8,6 @@ export default {
     color: colors.dark,
     fontSize: 20,
     padding:10,
-    fontFamily: Platform.OS === "android" ? "Chewy_400Regular" : "Avenir",
+    fontFamily: Platform.OS === "android" ? "Chewy_400Regular" : "Chewy_400Regular",
   },
 };

@@ -3,43 +3,57 @@ import {
   View,
   StyleSheet,
   Text,
-  ImageBackground,
+  Image,
 
 } from 'react-native';
 import routes from '../../navigation/routes';
 import AppButton from '../components/AppButton';
+import Screen from '../components/Screen';
 
 import colors from "../config/colors";
 
 function WelcomeScreen({navigation}) {
   return (
-    <ImageBackground
-        blurRadius={2}
-            style={styles.background}
-      source={require('../assets/welcome.png')}>
-
+    
+    <Screen style={styles.container}>
+      
+      <Image
+              style={styles.logo}
+              source={require('../assets/welcome.png')}
+          />
+      
       <View style={styles.buttonsContainer}>
-        <AppButton title="Login" color="black" textColor="primary"  onPress={()=>navigation.navigate(routes.LOGIN)}/>
-        <AppButton title="Register" color="transparent" textColor="primary" borderColor="black" onPress={()=>navigation.navigate(routes.REGISTER)}/>
+        <AppButton title="Login" color="black" textColor="primary"  onPress={()=>navigation.navigate(routes.REGISTER)}/>
+        <AppButton title="Register" color="transparent" textColor="black" borderColor="black" onPress={()=>navigation.navigate(routes.REGISTER)}/>
       </View>
-    </ImageBackground>
+      </Screen>
+
   );
 }
 
 const styles = StyleSheet.create({
+
+  container: {
+   padding:5, 
+  },
   background: {
     flex: 1,
     justifyContent: "flex-end",
     alignItems: "center",
   },
   buttonsContainer: {
+    top:200,
     padding: 20,
     width: "100%",
   },
-  logo: {
-    width: 100,
-    height: 100,
-  },
+    logo: {
+      width: 250,
+      height: 250,
+      alignSelf: 'center',
+      marginTop: 50,
+      marginBottom:20,
+  }
+  ,
   logoContainer: {
     position: "absolute",
     top: 70,
