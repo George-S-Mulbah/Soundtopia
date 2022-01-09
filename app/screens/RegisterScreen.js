@@ -7,6 +7,9 @@ import AppFormField from '../components/forms/AppFormField';
 import SubmitButton from '../components/forms/SubmitButton';
 import AppForm from '../components/forms/AppForm';
 import { ScrollView } from 'react-native';
+import { auth } from '../api/firebase';
+import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
+
 
 const validationSchema = Yup.object().shape({
     name: Yup.string().required().label("Name"),
@@ -14,6 +17,42 @@ const validationSchema = Yup.object().shape({
     password: Yup.string().required().min(4).label("Password"),
   });
 function RegisterScreen(props) {
+
+
+  const handleSubmit = async values => {
+    // This function received the values from the form
+    // The line below extract the two fields from the values object.
+    const { email, password } = values;
+    var body = {
+      password: password,
+      email: email
+    };
+
+
+    const auth = getAuth();
+createUserWithEmailAndPassword(auth, email, password)
+  .then((userCredential) => {
+    // Signed in 
+    const user = userCredential.user;
+
+    console.log(user);
+    // ...
+  })
+  .catch((error) => {
+    const errorCode = error.code;
+    const errorMessage = error.message;
+
+    console.log(errorMessage);
+    // ..
+  });
+    
+    // auth.createUserWithEmailAndPassword(email, password)
+    //   .then(userDetails => {
+    //     // const user = userDetails;
+    //     // console.log(user.email);
+    //   }).catch(e => console.log(e));
+
+  }
   return (
     <Screen style={styles.container}>
       
@@ -27,7 +66,7 @@ function RegisterScreen(props) {
       
 <AppForm
         initialValues={{ name:'' ,email : '' , password :'' }}
-        onSubmit={values => console.log(values)}
+        onSubmit={handleSubmit}
         validationSchema={validationSchema}
     >
           
@@ -49,7 +88,7 @@ function RegisterScreen(props) {
      
         <AppFormField
           autoCorrect={false}
-          name="email"
+          name="password"
           autoCapitalize="none"
           icon="lock"
           KeyboardType="email-address"
